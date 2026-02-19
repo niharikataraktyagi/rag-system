@@ -1,0 +1,3 @@
+RAG stands for Retrieval Augmented Generation.
+It allows AI systems to retrieve external knowledge before answering.
+Vector databases store embeddings for similarity search.
