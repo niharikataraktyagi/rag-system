@@ -1,42 +1,37 @@
-# RAG System with Local Embeddings
+RAG-Based Document Question Answering System
 
-A lightweight Retrieval-Augmented Generation (RAG) system built using local embeddings.
+Overview
 
-## Features
-- Local embedding generation
-- Document ingestion pipeline
-- Vector similarity search
-- Query interface
-- Clean modular structure
+This project implements a Retrieval-Augmented Generation (RAG) system using FastAPI, ChromaDB, HuggingFace embeddings, and Llama3 via Ollama. The system allows users to upload documents (TXT or PDF) and ask grounded questions based only on the uploaded content.
 
-## Project Structure
+Architecture
 
-rag-system/
-│
-├── app/
-│   ├── ingest.py
-│   └── query.py
-├── data/
-│   └── sample.txt
-├── .gitignore
-└── README.md
+Document Ingestion
 
-## How It Works
+TXT and PDF files supported
 
-1. Ingest documents
-2. Convert text to embeddings
-3. Store vectors
-4. Retrieve relevant context for queries
+Documents chunked into 500-character segments
 
-## Run the Project
+Embedded using all-MiniLM-L6-v2
 
-Create virtual environment:
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+Stored in ChromaDB with persistence
 
+Query Flow
 
-Run ingestion:
-python app/query.py
+Harmful query guardrail (pre-check)
 
+Similarity search (top-k retrieval)
 
+Relevance threshold check
+
+Context-grounded LLM response
+
+Response safety filtering
+
+Guardrails
+
+Blocks harmful queries (e.g., bomb, attack)
+
+Rejects unrelated queries
+
+Logs blocked attempts in guardrails.log
